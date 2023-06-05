@@ -1,0 +1,30 @@
+{
+  "direction": -1,
+  "movement": true,
+  "doors_opened": false,
+  "load": [
+    3,
+    1,
+    2
+  ],
+  "current_floor": 4,
+  "floor_info": [
+    {
+      "floor": 4,
+      "continue_up": true
+    },
+    {
+      "floor": 6,
+      "continue_down": true
+    },
+    {
+      "floor": 8,
+      "continue_up": true,
+      "continue_down": true
+    },
+    {
+      "floor": 0,
+      "continue_up": true
+    }
+  ]
+}
