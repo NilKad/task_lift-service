@@ -1,3 +1,25 @@
+@font-face {
+  font-family: 'seven-led';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/7LED.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Technology';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Technology'), url('./fonts/Technology.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Technology-Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Technology-Bold'),
+    url('./fonts/Technology-Bold.woff') format('woff');
+}
+
 body {
   margin: 0;
   height: 100vh;

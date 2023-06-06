@@ -20,6 +20,7 @@ export const FloorPanelNumList = styled.ul`
   gap: 4px;
   font-size: 12px;
   color: white;
+  /* justify-content: center; */
 `;
 
 export const FloorDirection = styled.div`

@@ -1,10 +1,19 @@
-export const genArray = () => {
+export const genArray = (reverse = false, numColumn = 2) => {
   const MIN_FLOOR = 0;
   const MAX_FLOOR = 12;
 
-  const array = [];
+  let array = [];
   for (let i = MIN_FLOOR; i <= MAX_FLOOR; i++) {
     array.push(i);
+  }
+  if (reverse) {
+    array = [...array].sort((a, b) => b - a);
+    for (let i = 0; i < array.length; i += numColumn) {
+      if (i === array.length - 1) continue;
+      const t = array[i];
+      array[i] = array[i + numColumn - 1];
+      array[i + numColumn - 1] = t;
+    }
   }
   return array;
 };

@@ -2,5 +2,6 @@ import styled from 'styled-components';
 
 export const LiftService = styled.div`
   display: flex;
-  height: 630px;
+  /* padding: 24px; */
+  height: 690px;
 `;

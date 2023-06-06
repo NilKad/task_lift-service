@@ -3,6 +3,8 @@ import { createGlobalStyle } from 'styled-components';
 // import { baseColor } from 'components/baseStyles/Variables.styled';
 
 export const GlobalStyle = createGlobalStyle`
+
+
  body, #root, main{
   height: 100vh;
  }

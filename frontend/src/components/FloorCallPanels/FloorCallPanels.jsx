@@ -3,6 +3,7 @@ import { FloorDirectionPaneles } from './FloorDirectionPaneles/FloorDirectionPan
 import * as SC from './FloorCallPanels.styled';
 import { FloorDirectionPanel } from './FloorDirectionPanel/FloorDirectionPanel';
 import { genArray } from '../../utils/genArray';
+import { LiftSimulate } from '../LiftSimulate/LiftSimulate';
 
 export const FloorCallPanels = () => {
   // const MIN_FLOOR = 0;
@@ -14,10 +15,9 @@ export const FloorCallPanels = () => {
       <FloorStatusPanel />
       {/* <FloorDirectionPaneles /> */}
       {/* <FloorDirectionPanel /> */}
-      <SC.FloorsDirectionsPaneles>
-        {genArray()
-          .sort((a, b) => b - a)
-          .map(e => (
+      <SC.FloorPanelWrapper>
+        <SC.FloorsDirectionsPaneles>
+          {genArray(true).map(e => (
             <FloorDirectionPanel
               key={e}
               floorNum={e}
@@ -25,7 +25,9 @@ export const FloorCallPanels = () => {
               MAX_FLOOR={MAX_FLOOR}
             />
           ))}
-      </SC.FloorsDirectionsPaneles>
+        </SC.FloorsDirectionsPaneles>
+        <LiftSimulate></LiftSimulate>
+      </SC.FloorPanelWrapper>
     </SC.FloorCallPanels>
   );
 };
