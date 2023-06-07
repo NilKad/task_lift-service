@@ -34,6 +34,10 @@ export const FloorTitle = styled.h2`
 export const FloorNumber = styled.p`
   font-size: 33px;
   font-weight: 500;
+  transition: color 200ms linear;
+  &.active {
+    color: #e5ab12;
+  }
 `;
 
 export const FloorDirection = styled.div`
@@ -71,10 +75,12 @@ export const Direction = styled.div`
   &.down {
     border-top: 16px solid white;
   }
-  &:hover.up {
+  &:hover.up,
+  &.up.active {
     border-bottom: 16px solid #e2cf38;
   }
-  &:hover.down {
+  &:hover.down,
+  &.down.active {
     border-top: 16px solid #e2cf38;
   }
 `;
@@ -86,6 +92,7 @@ export const DirectionInt = styled.div`
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   left: 50%;
+  cursor: pointer;
   transition: border 200ms linear;
   &.up {
     top: 50%;
@@ -97,12 +104,12 @@ export const DirectionInt = styled.div`
     transform: translate(-50%, -4px);
     border-top: 10px solid #00a2e8;
   }
-  &.up.active {
+  /* &.up.active {
     border-bottom: 10px solid white;
   }
   &.down.active {
     border-top: 10px solid white;
-  }
+  } */
   &:hover.up {
     /* border-bottom: 13px solid green; */
   }

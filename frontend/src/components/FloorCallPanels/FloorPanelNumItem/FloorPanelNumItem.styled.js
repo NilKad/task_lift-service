@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const FloorPanelNumItem = styled.li`
-  padding: 0 2px;
+  padding: 1px 3px;
   border: 2px solid transparent;
   /* border: 2px solid white; */
+  transition: border 200ms linear;
   &.active {
     border: 2px solid white;
   }

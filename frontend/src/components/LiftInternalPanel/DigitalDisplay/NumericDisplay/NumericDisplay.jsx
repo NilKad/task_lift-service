@@ -1,5 +1,5 @@
 import * as SC from './NumericDisplay.styled';
 
-export const NumericDisplay = () => {
-  return <SC.NumericDisplay>12</SC.NumericDisplay>;
+export const NumericDisplay = ({ currentFloor }) => {
+  return <SC.NumericDisplay>{currentFloor}</SC.NumericDisplay>;
 };

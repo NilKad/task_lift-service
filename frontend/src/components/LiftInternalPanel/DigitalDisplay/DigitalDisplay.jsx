@@ -2,11 +2,11 @@ import { DirectionDisplay } from './DirectionDisplay/DirectionDisplay';
 import { NumericDisplay } from './NumericDisplay/NumericDisplay';
 import * as SC from './DigitalDisplay.styled';
 
-export const DigitalDisplay = () => {
+export const DigitalDisplay = ({ currentFloor, direction }) => {
   return (
     <SC.DigitalDisplay>
-      <NumericDisplay />
-      <DirectionDisplay />
+      <NumericDisplay currentFloor={currentFloor} />
+      <DirectionDisplay direction={direction} />
     </SC.DigitalDisplay>
   );
 };

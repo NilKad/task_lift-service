@@ -3,49 +3,54 @@ import { genArray } from '../../../utils/genArray';
 
 import * as SC from './NumericPad.styled';
 
-export const NumericPad = () => {
+export const NumericPad = ({ load, liftHandlerButton }) => {
   const parkingFloor = 0;
   const COUNT_COLUMN = 3;
 
+  const renderServiceButton = e => {
+    const isActive = load.includes(e);
+
+    if (e === parkingFloor) {
+      return (
+        <>
+          <NumericButton
+            liftHandlerButton={liftHandlerButton}
+            key={'open'}
+            floorNum={'<>'}
+            parkingFloor={parkingFloor}
+            isActive={isActive}
+          />
+          <NumericButton
+            liftHandlerButton={liftHandlerButton}
+            key={e}
+            floorNum={e}
+            parkingFloor={parkingFloor}
+            isActive={isActive}
+          />
+          <NumericButton
+            liftHandlerButton={liftHandlerButton}
+            key={'close'}
+            floorNum={'><'}
+            parkingFloor={parkingFloor}
+            isActive={isActive}
+          />
+        </>
+      );
+    }
+    return (
+      <NumericButton
+        liftHandlerButton={liftHandlerButton}
+        key={e}
+        floorNum={e}
+        parkingFloor={parkingFloor}
+        isActive={isActive}
+      />
+    );
+  };
+
   return (
     <SC.NumericPadList>
-      {genArray(true, COUNT_COLUMN).map(e => (
-        <>
-          {e === 0 ? (
-            <>
-              <NumericButton
-                key={'open'}
-                floorNum={'<>'}
-                parkingFloor={parkingFloor}
-              />
-              <NumericButton key={e} floorNum={e} parkingFloor={parkingFloor} />
-              <NumericButton
-                key={'close'}
-                floorNum={'><'}
-                parkingFloor={parkingFloor}
-              />
-            </>
-          ) : (
-            <NumericButton key={e} floorNum={e} parkingFloor={parkingFloor} />
-          )}
-        </>
-      ))}
+      {genArray(true, COUNT_COLUMN).map(e => renderServiceButton(e))}
     </SC.NumericPadList>
   );
 };
-
-//   : (
-//   <>
-//     <NumericButton
-//       key={'open'}
-//       floorNum={'<>'}
-//       parkingFloor={parkingFloor}
-//     />
-//     <NumericButton key={e} floorNum={e} parkingFloor={parkingFloor} />
-//     <NumericButton
-//       key={'close'}
-//       floorNum={'><'}
-//       parkingFloor={parkingFloor}
-//     />
-//   </>
-// )

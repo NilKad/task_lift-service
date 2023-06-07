@@ -8,7 +8,7 @@ export const ButtonItem = styled.li`
   width: calc((100% - 60px * 2 - 16px) / 2);
 `;
 
-export const NumericButton = styled.div`
+export const NumericButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
