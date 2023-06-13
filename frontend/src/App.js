@@ -3,6 +3,9 @@
 import { Route, Routes } from 'react-router-dom';
 import { SharedLayout } from './shared/ShareLayout';
 import { LiftService } from './pages/LiftService';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:5001/api';
 
 function App() {
   // return <SharedLayout>APP Shared Layout</SharedLayout>;

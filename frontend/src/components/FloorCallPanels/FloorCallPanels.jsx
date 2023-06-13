@@ -10,6 +10,9 @@ export const FloorCallPanels = ({
   currentFloor,
   floorInfo,
   floorDirectionHandler,
+  doorOpened,
+  timerDoorClose,
+  doorOpening,
 }) => {
   // const MIN_FLOOR = 0;
   const MAX_FLOOR = 12;
@@ -32,7 +35,11 @@ export const FloorCallPanels = ({
             />
           ))}
         </SC.FloorsDirectionsPaneles>
-        <LiftSimulate />
+        <LiftSimulate
+          doorOpened={doorOpened}
+          timerDoorClose={timerDoorClose}
+          doorOpening={doorOpening}
+        />
       </SC.FloorPanelWrapper>
     </SC.FloorCallPanels>
   );

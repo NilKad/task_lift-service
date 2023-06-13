@@ -22,13 +22,13 @@ export const FloorDirectionPanel = ({
     return '';
   };
   const onClickHandler = e => {
+    //* check isue this floor and direction
     const classList = e.target.classList;
-    // console.log('!!!! ', e.target.classList);
     if (classList.contains('up') && callDirection('up') === '') {
-      floorDirectionHandler({ floor: floorNum, continue_up: true });
+      floorDirectionHandler({ floorNum, floorDirection: 'up' });
     }
     if (classList.contains('down') && callDirection('down') === '') {
-      floorDirectionHandler({ floor: floorNum, continue_down: true });
+      floorDirectionHandler({ floorNum, floorDirection: 'down' });
     }
   };
   return (

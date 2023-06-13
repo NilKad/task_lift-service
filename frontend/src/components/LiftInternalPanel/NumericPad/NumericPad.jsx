@@ -18,7 +18,6 @@ export const NumericPad = ({ load, liftHandlerButton }) => {
             key={'open'}
             floorNum={'<>'}
             parkingFloor={parkingFloor}
-            isActive={isActive}
           />
           <NumericButton
             liftHandlerButton={liftHandlerButton}
@@ -32,7 +31,6 @@ export const NumericPad = ({ load, liftHandlerButton }) => {
             key={'close'}
             floorNum={'><'}
             parkingFloor={parkingFloor}
-            isActive={isActive}
           />
         </>
       );

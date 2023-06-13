@@ -40,9 +40,11 @@ export const NumericButton = styled.button`
   -moz-background-clip: text;
   background-clip: text; */
 
-  &.active,
-  &:hover {
+  &.active {
     border: 4px solid #80cf30;
+  }
+
+  &:hover {
     color: #c59207;
   }
 `;

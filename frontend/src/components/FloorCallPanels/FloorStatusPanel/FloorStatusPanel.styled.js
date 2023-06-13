@@ -11,6 +11,8 @@ export const FloorStatusPanel = styled.div`
   margin-left: auto;
   margin-right: auto;
   border-radius: 70px/10px;
+  box-shadow: 5px 5px 10px rgba(190, 190, 190, 0.9),
+    -7px -7px 20px rgba(255, 255, 255, 0.4);
 `;
 
 export const FloorPanelNumList = styled.ul`
