@@ -1,4 +1,4 @@
-export const genArray = (reverse = false, numColumn = 2) => {
+export const genArray = (reverse = false, numColumn = 2, isIntLiftPanel = false) => {
   const MIN_FLOOR = 0;
   const MAX_FLOOR = 12;
 
@@ -14,6 +14,10 @@ export const genArray = (reverse = false, numColumn = 2) => {
       array[i] = array[i + numColumn - 1];
       array[i + numColumn - 1] = t;
     }
+  }
+  if (isIntLiftPanel) {
+    // const lastElement = array.slice()
+    // array.
   }
   return array;
 };

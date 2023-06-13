@@ -5,22 +5,21 @@ export const FloorDirectionPanel = ({
   parkingFloor,
   MAX_FLOOR,
   currentFloor,
-  floorInfo,
   floorDirectionHandler,
+  activeDirections,
 }) => {
-  const floorActive = currentFloor === floorNum ? 'active' : '';
+  const {} = activeDirections;
+  const isFloorActive = currentFloor === floorNum ? 'active' : '';
   // const direction = () => {};
   const callDirection = str => {
     for (const e of floorInfo) {
       if (e.floor !== floorNum) continue;
-      if (
-        (str === 'up' && 'continue_up' in e) ||
-        (str === 'down' && 'continue_down' in e)
-      )
+      if ((str === 'up' && 'continue_up' in e) || (str === 'down' && 'continue_down' in e))
         return 'active';
     }
     return '';
   };
+  const isShowLifgtButton = () => {};
   const onClickHandler = e => {
     //* check isue this floor and direction
     const classList = e.target.classList;
@@ -35,25 +34,19 @@ export const FloorDirectionPanel = ({
     <SC.FloorDirectionPanel>
       <SC.FloorInfo>
         <SC.FloorTitle>floor</SC.FloorTitle>
-        <SC.FloorNumber className={floorActive}>
+        <SC.FloorNumber className={isFloorActive}>
           {floorNum === parkingFloor ? 'P' : floorNum}
         </SC.FloorNumber>
       </SC.FloorInfo>
       <SC.FloorDirection>
         <SC.DirectionWrapper>
           {floorNum !== MAX_FLOOR && (
-            <SC.Direction
-              className={`up ${callDirection('up')}  `}
-              onClick={e => onClickHandler(e)}
-            >
+            <SC.Direction className={`up ${up}  `} onClick={e => onClickHandler(e)}>
               <SC.DirectionInt className={'up'} />
             </SC.Direction>
           )}
           {floorNum !== parkingFloor && (
-            <SC.Direction
-              className={`down ${callDirection('down')} `}
-              onClick={e => onClickHandler(e)}
-            >
+            <SC.Direction className={`down ${down} `} onClick={e => onClickHandler(e)}>
               <SC.DirectionInt className={'down'} />
             </SC.Direction>
           )}

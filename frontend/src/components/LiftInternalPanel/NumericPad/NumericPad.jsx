@@ -45,6 +45,7 @@ export const NumericPad = ({ load, liftHandlerButton }) => {
       />
     );
   };
+  let arr = getArray(true, COUNT_COLUMN, true);
 
   return (
     <SC.NumericPadList>

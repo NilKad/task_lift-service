@@ -14,35 +14,11 @@ import { LIftStatus } from '../components/LIftStatus/LIftStatus';
 import { difDate } from '../utils/difDate';
 import { floorInfoToArray } from '../helpers/floorInfoToArray';
 
-const initLoad = [4, 6, 2, 8];
-const initDirection = 1;
-const initFloorInfo = [
-  {
-    floor: 4,
-    continue_up: true,
-  },
-  {
-    floor: 6,
-    continue_down: true,
-  },
-  {
-    floor: 8,
-    continue_up: true,
-    continue_down: true,
-  },
-  {
-    floor: 0,
-    continue_up: true,
-  },
-];
 const T_MOVEMENT = 2;
 const T_DOOR_OPEN_CLOSE = 2;
 const T_AUTO_DOOR_CLOSE = 5;
 
-const MIN_FLOOR = 0;
-const MAX_FLOOR = 12;
-
-const parkingFloor = 0;
+const PARKING_FLOOR = 0;
 
 export const LiftService = () => {
   const [isFirstLoading, setIsFirstLoading] = useState(false);
@@ -348,7 +324,7 @@ export const LiftService = () => {
 
   const liftHandlerButton = async e => {
     const t = e.target.textContent;
-    const num = t === 'P' ? parkingFloor : Number.parseInt(t);
+    const num = t === 'P' ? PARKING_FLOOR : Number.parseInt(t);
     const data = await addCallFloor({ num });
     updateStatus(data);
   };
@@ -362,6 +338,7 @@ export const LiftService = () => {
     setDataFromServer(data);
     updateStatus(data);
   };
+  // const direction = () => {};
 
   useEffect(() => {
     // console.log('useeffect isMovement: ', isMovement);

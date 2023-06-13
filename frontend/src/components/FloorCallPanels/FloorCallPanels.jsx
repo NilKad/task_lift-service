@@ -18,6 +18,17 @@ export const FloorCallPanels = ({
   const MAX_FLOOR = 12;
   const parkingFloor = 0;
 
+  const activeCallDirection = () => {
+    const floorItem = getItemFromFloorInfo(floorInfo, currentFloor);
+    if (floorItem.length === 0) return '';
+    const isUp = currentFloor === floorItem.floor && 'continue_up' in floorItem && direction === 1;
+    const isDown =
+      currentFloor === floorItem.floor && 'continue_down' in floorItem && direction === -1;
+    const up = isUp ? 'active' : '';
+    const down = isDown ? 'active' : '';
+    return { up, down };
+  };
+
   return (
     <SC.FloorCallPanels>
       <FloorStatusPanel currentFloor={currentFloor} direction={direction} />
@@ -30,8 +41,8 @@ export const FloorCallPanels = ({
               parkingFloor={parkingFloor}
               MAX_FLOOR={MAX_FLOOR}
               currentFloor={currentFloor}
-              floorInfo={floorInfo}
               floorDirectionHandler={floorDirectionHandler}
+              activeDirections={activeCallDirection()}
             />
           ))}
         </SC.FloorsDirectionsPaneles>
