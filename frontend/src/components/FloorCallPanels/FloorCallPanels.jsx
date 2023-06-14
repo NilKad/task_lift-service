@@ -4,6 +4,7 @@ import * as SC from './FloorCallPanels.styled';
 import { FloorDirectionPanel } from './FloorDirectionPanel/FloorDirectionPanel';
 import { genArray } from '../../utils/genArray';
 import { LiftSimulate } from '../LiftSimulate/LiftSimulate';
+import { getItemFromFloorInfo } from '../../helpers/getItemFromFloorInfo';
 
 export const FloorCallPanels = ({
   direction,
@@ -18,12 +19,18 @@ export const FloorCallPanels = ({
   const MAX_FLOOR = 12;
   const parkingFloor = 0;
 
-  const activeCallDirection = () => {
-    const floorItem = getItemFromFloorInfo(floorInfo, currentFloor);
-    if (floorItem.length === 0) return '';
-    const isUp = currentFloor === floorItem.floor && 'continue_up' in floorItem && direction === 1;
+  const activeCallDirection = floorNum => {
+    const floorItem = getItemFromFloorInfo(floorInfo, floorNum);
+
+    if (floorItem.length === 0) return { up: '', down: '' };
+    const isUp =
+      'continue_up' in floorItem && !(floorItem.floor === currentFloor && direction === 1)
+        ? true
+        : false;
     const isDown =
-      currentFloor === floorItem.floor && 'continue_down' in floorItem && direction === -1;
+      'continue_down' in floorItem && !(floorItem.floor === currentFloor && direction === -1)
+        ? true
+        : false;
     const up = isUp ? 'active' : '';
     const down = isDown ? 'active' : '';
     return { up, down };
@@ -42,7 +49,7 @@ export const FloorCallPanels = ({
               MAX_FLOOR={MAX_FLOOR}
               currentFloor={currentFloor}
               floorDirectionHandler={floorDirectionHandler}
-              activeDirections={activeCallDirection()}
+              activeDirections={activeCallDirection(e)}
             />
           ))}
         </SC.FloorsDirectionsPaneles>
