@@ -49,7 +49,7 @@ export const LiftService = () => {
     timerAutoDoorClose,
   };
   //* ****** LiftCore all logic lift *******
-  const liftCore = async () => {
+  const liftCore = async ({ isNeedOpenDoor = false, isNeedCloseDoor = false }) => {
     console.log('!! Start liftCore');
 
     const checkNeedOpenDoor = (floor = currentFloor) => {
@@ -224,6 +224,16 @@ export const LiftService = () => {
     checkAllTimer();
     //* ---------------- End check all timers
 
+    //handl openButton
+    if (!isMovement && isNeedOpenDoor) {
+      setDoorOpening(true);
+      setTimerDoorClose(null);
+      startAutoDoorClose();
+    }
+    if (isMovement && isNeedCloseDoor) {
+      // setTimerAutoDoorClose();
+    }
+
     console.log('!! Start liftCore checkNeedOpenDoor #10');
     if (direction === 0 && isMovement) {
       setIsMovement(false);
@@ -324,7 +334,16 @@ export const LiftService = () => {
 
   const liftHandlerButton = async e => {
     const t = e.target.textContent;
-    const num = t === 'P' ? PARKING_FLOOR : Number.parseInt(t);
+    let num = t === 'P' ? PARKING_FLOOR : Number.parseInt(t);
+    if (t === '<>' || t === '><') {
+      const isNeedOpenDoor = t === '<>' ? true : false;
+      const isNeedCloseDoor = t === '><' ? true : false;
+      liftCore({ isNeedOpenDoor, isNeedCloseDoor });
+      return;
+    }
+    // num = t === '<>' ? 'open' : Number.parseInt(t);
+    // num = t === '><' ? 'close' : Number.parseInt(t);
+    console.log('____liftHandlerButton t: ', t);
     const data = await addCallFloor({ num });
     updateStatus(data);
   };
@@ -355,7 +374,7 @@ export const LiftService = () => {
 
   useMemo(() => {
     console.log('useMemo isMovement: ', isMovement, '\tcurrentFloor: ', currentFloor);
-    liftCore();
+    liftCore({});
   }, [
     isMovement,
     direction,
