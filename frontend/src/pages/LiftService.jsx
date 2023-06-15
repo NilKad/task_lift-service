@@ -35,7 +35,7 @@ export const LiftService = () => {
   const [timerAutoDoorClose, setTimerAutoDoorClose] = useState(0);
   const [doorOpening, setDoorOpening] = useState(false);
 
-  const [dataFromServer, setDataFromServer] = useState({});
+  // const [dataFromServer, setDataFromServer] = useState({});
 
   const idTimerMovement = useRef(null);
   const idTimeDoorClose = useRef(null);
@@ -276,7 +276,7 @@ export const LiftService = () => {
 
   const loadData = async () => {
     const data = await getLiftStatus();
-    setDataFromServer(data);
+    // setDataFromServer(data);
     updateStatus(data);
   };
 
