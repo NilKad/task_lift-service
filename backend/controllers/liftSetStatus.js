@@ -4,7 +4,6 @@ const liftSetStatus = async (req, res) => {
   const { floorNum } = req.params;
   const { isOpened, isMovement } = req.body;
   console.log('isOpened: ', isOpened, '\tisMovement: ', isMovement);
-  // console.log('!!!!!REQ: ', req);
 
   if (!(floorNum !== undefined && isOpened !== undefined && isMovement !== undefined)) {
     const error = new Error('FlooNum, direction or movement incorrect');
@@ -17,7 +16,6 @@ const liftSetStatus = async (req, res) => {
     error.status = 401;
     throw error;
   }
-  // data.direction
   const data = await setCurrenFloor(floorNum, isOpened, isMovement);
   res.status(200).json(data);
 };

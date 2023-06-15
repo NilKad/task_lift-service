@@ -6,7 +6,6 @@ const setCurrenFloor = async (floor, isOpened, isMovement) => {
   const { MAX_FLOOR } = process.env;
 
   const data = await getStatus();
-  // let { load } = data;
   const { floor_info, load } = data;
   data.current_floor = floor;
   data.movement = isMovement;
@@ -16,15 +15,8 @@ const setCurrenFloor = async (floor, isOpened, isMovement) => {
 
   if (!isOpened && data.doors_opened) {
     doorToClose = true;
-    // data.doors_opened = false;
-    // const str = data.load.toString();
-
-    //* delete from load current floor
-    // const loadArray = data.load;
-    // load = load.filter(e => e !== floor);
 
     //* check and delete current floor from floor_info
-
     const array = data.floor_info;
     data.floor_info = floor_info
       .map(item => {
@@ -38,19 +30,7 @@ const setCurrenFloor = async (floor, isOpened, isMovement) => {
       })
       .filter(e => e !== null);
   }
-  // if (load.length === 0 && floor_info.length === 1 && floor_info[0].floor == floor)
-  //   data.floor_info = [];
-
   data.doors_opened = isOpened;
-  // if (isOpened) {
-  //   data.doors_opened = true
-  // }
-  // else {
-  //   if (data.doors_opened) {
-  //     // data.direction = checkToMovement(data);
-  //   }
-  //   data.doors_opened = false;
-  // }
   data.direction = checkToMovement(data, doorToClose); //! ~~~~~
 
   return await writeStatus(data, doorToClose);
