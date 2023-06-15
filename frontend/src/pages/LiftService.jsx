@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Container } from '../components/Container/Container';
 import { FloorCallPanels } from '../components/FloorCallPanels/FloorCallPanels';
 import { LiftInternalPanel } from '../components/LiftInternalPanel/LiftInternalPanel';
@@ -37,9 +37,9 @@ export const LiftService = () => {
 
   // const [dataFromServer, setDataFromServer] = useState({});
 
-  const idTimerMovement = useRef(null);
-  const idTimeDoorClose = useRef(null);
-  const idTimerAutoDoorClose = useRef(null);
+  // const idTimerMovement = useRef(null);
+  // const idTimeDoorClose = useRef(null);
+  // const idTimerAutoDoorClose = useRef(null);
 
   const forStatus = {
     doorOpened,

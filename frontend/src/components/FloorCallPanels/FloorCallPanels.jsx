@@ -1,5 +1,4 @@
 import { FloorStatusPanel } from './FloorStatusPanel/FloorStatusPanel';
-import { FloorDirectionPaneles } from './FloorDirectionPaneles/FloorDirectionPaneles';
 import * as SC from './FloorCallPanels.styled';
 import { FloorDirectionPanel } from './FloorDirectionPanel/FloorDirectionPanel';
 import { genArray } from '../../utils/genArray';
