@@ -1,8 +1,8 @@
 {
   "direction": 0,
   "movement": false,
-  "doors_opened": true,
+  "doors_opened": false,
   "load": [],
-  "current_floor": 2,
+  "current_floor": 1,
   "floor_info": []
 }
