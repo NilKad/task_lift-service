@@ -2,7 +2,7 @@ import * as SC from './LiftSimulate.styled';
 import liftBackground from '../../img/lift.jpg';
 import arrow from '../../img/arrow.png';
 
-export const LiftSimulate = ({ doorOpened, timerDoorClose, doorOpening }) => {
+export const LiftSimulate = ({ doorOpened, timerDoorClose, doorOpening, enterExitHandler }) => {
   // console.log(dataFromServer);
   // const isOpen = doorOpened ? 'open' : '';
   const isOpen = doorOpening ? 'open' : '';
@@ -26,8 +26,13 @@ export const LiftSimulate = ({ doorOpened, timerDoorClose, doorOpening }) => {
           <SC.IntBorder className={'int'} />
         </SC.LiftDoor>
         <SC.Arrow className={isOpen ? 'arrowShow' : ''}>
-          <SC.ArrowImg src={arrow} width={'100px'} />
-          <SC.ArrowImg className={'rotate'} src={arrow} width={'100px'} />
+          <SC.ArrowImg src={arrow} width={'100px'} onClick={enterExitHandler} />
+          <SC.ArrowImg
+            className={'rotate'}
+            src={arrow}
+            width={'100px'}
+            onClick={enterExitHandler}
+          />
         </SC.Arrow>
       </SC.LiftFrame>
     </SC.LiftSimulate>

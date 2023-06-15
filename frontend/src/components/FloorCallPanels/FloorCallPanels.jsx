@@ -1,5 +1,4 @@
 import { FloorStatusPanel } from './FloorStatusPanel/FloorStatusPanel';
-import { FloorDirectionPaneles } from './FloorDirectionPaneles/FloorDirectionPaneles';
 import * as SC from './FloorCallPanels.styled';
 import { FloorDirectionPanel } from './FloorDirectionPanel/FloorDirectionPanel';
 import { genArray } from '../../utils/genArray';
@@ -14,6 +13,7 @@ export const FloorCallPanels = ({
   doorOpened,
   timerDoorClose,
   doorOpening,
+  enterExitHandler,
 }) => {
   // const MIN_FLOOR = 0;
   const MAX_FLOOR = 12;
@@ -57,6 +57,7 @@ export const FloorCallPanels = ({
           doorOpened={doorOpened}
           timerDoorClose={timerDoorClose}
           doorOpening={doorOpening}
+          enterExitHandler={enterExitHandler}
         />
       </SC.FloorPanelWrapper>
     </SC.FloorCallPanels>

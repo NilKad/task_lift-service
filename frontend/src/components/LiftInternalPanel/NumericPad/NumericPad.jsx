@@ -10,36 +10,47 @@ export const NumericPad = ({ load, liftHandlerButton }) => {
   const renderServiceButton = e => {
     const isActive = load.includes(e);
 
-    if (e === parkingFloor) {
-      return (
-        <>
-          <NumericButton
-            liftHandlerButton={liftHandlerButton}
-            key={'open'}
-            floorNum={'<>'}
-            parkingFloor={parkingFloor}
-          />
-          <NumericButton
-            liftHandlerButton={liftHandlerButton}
-            key={e}
-            floorNum={e}
-            parkingFloor={parkingFloor}
-            isActive={isActive}
-          />
-          <NumericButton
-            liftHandlerButton={liftHandlerButton}
-            key={'close'}
-            floorNum={'><'}
-            parkingFloor={parkingFloor}
-          />
-        </>
-      );
+    // if (e === parkingFloor) {
+    //   return (
+    //     <>
+    //       <NumericButton
+    //         liftHandlerButton={liftHandlerButton}
+    //         key={'open'}
+    //         floorNum={'<>'}
+    //         parkingFloor={parkingFloor}
+    //       />
+    //       <NumericButton
+    //         liftHandlerButton={liftHandlerButton}
+    //         key={e}
+    //         floorNum={e}
+    //         parkingFloor={parkingFloor}
+    //         isActive={isActive}
+    //       />
+    //       <NumericButton
+    //         liftHandlerButton={liftHandlerButton}
+    //         key={'close'}
+    //         floorNum={'><'}
+    //         parkingFloor={parkingFloor}
+    //       />
+    //     </>
+    //   );
+    // }
+    let key = e;
+    let num = e;
+    if (e === 'open') {
+      key = 'open';
+      num = '<>';
     }
+    if (e === 'close') {
+      key = 'close';
+      num = '><';
+    }
+
     return (
       <NumericButton
         liftHandlerButton={liftHandlerButton}
-        key={e}
-        floorNum={e}
+        key={key}
+        floorNum={num}
         parkingFloor={parkingFloor}
         isActive={isActive}
       />
@@ -49,7 +60,8 @@ export const NumericPad = ({ load, liftHandlerButton }) => {
 
   return (
     <SC.NumericPadList>
-      {genArray(true, COUNT_COLUMN).map(e => renderServiceButton(e))}
+      {/* {genArray(true, COUNT_COLUMN).map(e => renderServiceButton(e))} */}
+      {arr.map(e => renderServiceButton(e))}
     </SC.NumericPadList>
   );
 };

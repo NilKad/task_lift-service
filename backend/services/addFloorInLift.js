@@ -9,9 +9,6 @@ const addFloorInLift = async floor => {
   }
   console.log('!!!!addFloorInLift data: ', data);
   if (data.direction === 0 || (data.direction !== 0 && data.load.length === 1)) {
-    // const dataCheck = checkToMovement(data);
-    // data.direction = checkToMovement(data);
-    // console.log(dataCheck);
   }
   data.direction = checkToMovement(data); //!!---
 

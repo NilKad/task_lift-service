@@ -17,7 +17,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/lift', mainRouter);
-// app.use("/floor", mainRouter);
 
 app.use((req, res) => {
   console.log('!!!!! APP (req, res) !!!!!!');

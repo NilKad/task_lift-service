@@ -23,11 +23,9 @@ const addFloorDirection = async (floor, direction) => {
   }
   data.floor_info = newArray;
   if (data.direction === 0 || (data.direction !== 0 && data.floor_info.length === 1)) {
-    // data.direction = checkToMovement(data); //*------
   }
   data.direction = checkToMovement(data); //!----
 
-  // console.log('newData: ', data);
   return await writeStatus(data);
 };
 
