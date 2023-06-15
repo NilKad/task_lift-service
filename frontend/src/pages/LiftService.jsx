@@ -34,7 +34,7 @@ export const LiftService = () => {
   const [timerDoorClose, setTimerDoorClose] = useState(null);
   const [timerAutoDoorClose, setTimerAutoDoorClose] = useState(0);
   const [doorOpening, setDoorOpening] = useState(false);
-  // const  dataFromServer = useRef();
+
   const [dataFromServer, setDataFromServer] = useState({});
 
   const idTimerMovement = useRef(null);
@@ -54,15 +54,8 @@ export const LiftService = () => {
     isNeedCloseDoor = false,
     enterExit = false,
   }) => {
-    // console.log('!! Start liftCore');
-    console.log('liftCore isNeedCloseDoor: ', isNeedCloseDoor);
-
     const checkNeedOpenDoor = (floor = currentFloor) => {
-      // console.log('!! Start liftCore checkNeedOpenDoor');
-
       if (load.includes(floor)) return true;
-
-      // console.log('!! Start liftCore checkNeedOpenDoor #1');
       for (const e of floorInfo) {
         if (floor !== e.floor) continue;
         if (direction === 0 && !doorOpened) return true;
@@ -70,8 +63,6 @@ export const LiftService = () => {
         if ((direction === 1 && e.continue_up) || (direction === -1 && e.continue_down))
           return true;
       }
-
-      // console.log('!! Start liftCore checkNeedOpenDoor #2');
       //если лифт едет вверх и есть вызовы на этажах в низ, то лифт доетет до смого врхнего и остановиться там
       const arr = floorInfoToArray(floorInfo, direction === -1 ? 'continue_up' : 'continue_down');
       // если едем вверх проверяем load, если есть, то дверь не открываем
@@ -80,15 +71,14 @@ export const LiftService = () => {
 
       if (direction === 1 && currentFloor === arr.sort((a, b) => b - a)[0]) return true;
       if (direction === -1 && currentFloor === arr.sort((a, b) => a - b)[0]) return true;
-      // console.log('!! Start liftCore checkNeedOpenDoor #3');
       return false;
     };
+
     const checkIsNeedToMove = () => {
       return load.length > 0 || floorInfo.length > 0;
     };
     const startToNextFloor = () => {
       const currentDate = new Date();
-      console.log('!!!!!!!! set florToFloor');
       setTimeFloortoFloor(currentDate.setSeconds(currentDate.getSeconds() + T_MOVEMENT));
     };
 
@@ -152,7 +142,6 @@ export const LiftService = () => {
         checkOneTimer(timeFloortoFloor, setTimeFloortoFloor) &&
         checkNeedOpenDoor(currentFloor + direction)
       ) {
-        console.log('!!CheckAlltimer checkNeedOpenDoor START OPEN DOOR');
         await stopMotor(currentFloor + direction);
         startToOpenCloseDoor();
       }
@@ -184,31 +173,6 @@ export const LiftService = () => {
       ) {
         startToOpenCloseDoor();
       }
-      // if (
-      //   !timerDoorClose &&
-      //   !timeFloortoFloor &&
-      //   !timerAutoDoorClose &&
-      //   !isMovement &&
-      //   !doorOpened &&
-      //   direction === 0 &&
-      //   checkNeedOpenDoor() &&
-      //   floorInfo.length > 0
-      // ) {
-      //   startToOpenCloseDoor();
-      // }
-      // if (
-      //   !timerDoorClose &&
-      //   !timeFloortoFloor &&
-      //   !timerAutoDoorClose &&
-      //   !isMovement &&
-      //   !doorOpened &&
-      //   direction === 0 &&
-      //   checkNeedOpenDoor() &&
-      //   floorInfo.length === 0 &&
-      //   load.includes(currentFloor)
-      // ) {
-      //   startToOpenCloseDoor();
-      // }
     };
     checkAllTimer();
     //* ---------------- End check all timers
@@ -233,15 +197,11 @@ export const LiftService = () => {
     }
 
     if (direction === 0 && isMovement) {
-      // console.log('!! Start liftCore checkNeedOpenDoor #10');
       setIsMovement(false);
-      console.log('!!!!! shield isMovement: ', isMovement);
-      // sendToServer();
       await stopMotor();
       return;
     }
 
-    // console.log('!! Start liftCore restart floorToFloor timer #11');
     // лифт едет и должен ехать дальше, перезапуск таймера
     if (!timeFloortoFloor && direction !== 0 && isMovement && !checkNeedOpenDoor()) {
       const data = await sendCurrentStatus({
@@ -252,12 +212,10 @@ export const LiftService = () => {
       updateStatus(data);
       if (!checkNeedOpenDoor()) startToNextFloor();
     }
-    // console.log('!! Start liftCore need start motor #12');
 
     // лифт должен поехать:
     // - есть напр.движения / не движется
     // - двери закрыты / таймер двери в нуле
-    //! ??? не нужно окрывать двери на этом этаже
     // нкжно ли кудато ехать
     // * тогда включить мотор и запустить таймер этажа
     // console.log('---LiftCore checkNeedOpenDoor : ', checkNeedOpenDoor());
@@ -271,29 +229,6 @@ export const LiftService = () => {
       if (checkNeedOpenDoor()) startToOpenCloseDoor();
       if (!checkNeedOpenDoor() && checkIsNeedToMove()) startMotor();
     }
-    // if (
-    //   direction !== 0 &&
-    //   !isMovement &&
-    //   !doorOpened &&
-    //   timerDoorClose === null &&
-    //   timeFloortoFloor === null &&
-    //   checkNeedOpenDoor()
-    // ) {
-    //   console.log('---LiftCore door OPENED! checkNeedOpenDoor : ', checkNeedOpenDoor());
-    //   startToOpenCloseDoor();
-    // }
-    // if (
-    //   direction !== 0 &&
-    //   !isMovement &&
-    //   !doorOpened &&
-    //   timerDoorClose === null &&
-    //   timeFloortoFloor === null &&
-    //   !checkNeedOpenDoor() &&
-    //   checkIsNeedToMove()
-    // ) {
-    //   startMotor();
-    // }
-    // console.log('!! Start liftCore motor not start #13');
   };
   //* ******** end lift core *******
 
@@ -314,7 +249,6 @@ export const LiftService = () => {
     setDoorOpened(doors_opened);
     setLoad([...dataLoad]);
     setFloorInfo(floor_info);
-    // if (!isMovement && !doorOpened && direction === 0 && floorInfo.length > 0) liftCore();
   };
   //* ------- end Upadte current status from server
 
@@ -327,8 +261,6 @@ export const LiftService = () => {
       liftCore({ isNeedOpenDoor, isNeedCloseDoor });
       return;
     }
-
-    console.log('____liftHandlerButton t: ', t);
     const data = await addCallFloor({ num });
     updateStatus(data);
   };
@@ -347,10 +279,8 @@ export const LiftService = () => {
     setDataFromServer(data);
     updateStatus(data);
   };
-  // const direction = () => {};
 
   useEffect(() => {
-    // console.log('useeffect isMovement: ', isMovement);
     if (intervalId) return;
     setIsFirstLoading(true);
     loadData();
@@ -359,19 +289,9 @@ export const LiftService = () => {
   }, [direction, doorOpened, floorInfo.length, intervalId, isMovement, loadData]);
 
   useMemo(() => {
-    // console.log('useMemo isMovement: ', isMovement, '\tcurrentFloor: ', currentFloor);
     liftCore({});
-  }, [
-    isMovement,
-    direction,
-    load,
-    doorOpened,
-    currentFloor,
-    floorInfo,
-    // timeFloortoFloor,
-    // timerDoorClose,
-    // timerAutoDoorClose,
-  ]);
+  }, [isMovement, direction, load, doorOpened, currentFloor, floorInfo]);
+
   return (
     <Section>
       <Container>
