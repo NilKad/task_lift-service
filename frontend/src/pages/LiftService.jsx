@@ -68,8 +68,6 @@ export const LiftService = () => {
       // проверка max min floor
       if (isMovement) if (direction === 1 && floor === MAX_FLOOR) return true;
       if (direction === -1 && floor === MIN_FLOOR) return true;
-      // if (floor === MAX_FLOOR || (floor === MIN_FLOOR && direction !== 0 && isMovement))
-      //   return true;
 
       //если лифт едет вверх и есть вызовы на этажах в низ, то лифт доетет до смого врхнего и остановиться там
       const arr = floorInfoToArray(floorInfo, direction === -1 ? 'continue_up' : 'continue_down');
