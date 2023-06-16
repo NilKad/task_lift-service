@@ -9,7 +9,6 @@ export const FloorDirectionPanel = ({
   activeDirections,
 }) => {
   const { up, down } = activeDirections;
-  // console.log('floorNum: ', floorNum, '\tup: ', up, '\tdown: ', down);
   const isFloorActive = currentFloor === floorNum ? 'active' : '';
 
   const isShowLifgtButton = () => {};

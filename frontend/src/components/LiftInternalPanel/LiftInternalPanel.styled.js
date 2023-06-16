@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const LiftInternalPanel = styled.div`
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   padding: 24px 24px;
   width: 50%;
   background-color: #cbcedc;

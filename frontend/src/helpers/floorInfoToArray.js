@@ -7,4 +7,3 @@ export const floorInfoToArray = (floorInfo, continueDir = null) => {
   }, []);
 };
 
-// module.exports = floorInfoToArray;
