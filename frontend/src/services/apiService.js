@@ -5,7 +5,6 @@ const url = 'lift';
 export const getLiftStatus = async () => {
   try {
     const data = await axios(url);
-    // console.log(data);
     return data.data;
   } catch (error) {
     console.log(error.message);
@@ -15,9 +14,7 @@ export const getLiftStatus = async () => {
 
 export const addCallFloor = async ({ num: floorNum }) => {
   try {
-    // console.log('num: ', floorNum);
     const data = await axios.put(`${url}/${floorNum}`);
-    // console.log('!API DATA: ', data);
     return data.data;
   } catch (error) {
     console.log(error.message);
@@ -26,11 +23,8 @@ export const addCallFloor = async ({ num: floorNum }) => {
 };
 
 export const sendCallFloorDirection = async ({ floorNum, floorDirection }) => {
-  // console.log('floor: ', floorNum, '\tfloorDirection: ', floorDirection);
-  // floorNum, direction
   try {
     const data = await axios.put(`${url}/${floorNum}/${floorDirection}`);
-    // console.log('!API DATA: ', data.data);
     return data.data;
   } catch (error) {
     console.log(error.message);
@@ -51,5 +45,3 @@ export const sendCurrentStatus = async ({ floorNum: num, isMovement, doorOpened:
     console.log(error.message);
   }
 };
-
-// module.export = { getLiftStatus };

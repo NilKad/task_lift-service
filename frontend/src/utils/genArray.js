@@ -16,9 +16,6 @@ export const genArray = (reverse = false, numColumn = 2, isIntLiftPanel = false)
     }
   }
   if (isIntLiftPanel) {
-    // const lastElement = array.splice(10, 2);
-    // array.push('open', lastElement, 'close');
-    // array.push('open');
     array.splice(array.length - 1, 0, 'open');
     array.push('close');
   }

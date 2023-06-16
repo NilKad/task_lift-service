@@ -15,7 +15,6 @@ export const FloorCallPanels = ({
   doorOpening,
   enterExitHandler,
 }) => {
-  // const MIN_FLOOR = 0;
   const MAX_FLOOR = 12;
   const parkingFloor = 0;
 

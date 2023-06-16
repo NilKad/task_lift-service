@@ -58,10 +58,5 @@ export const NumericPad = ({ load, liftHandlerButton }) => {
   };
   let arr = genArray(true, COUNT_COLUMN, true);
 
-  return (
-    <SC.NumericPadList>
-      {/* {genArray(true, COUNT_COLUMN).map(e => renderServiceButton(e))} */}
-      {arr.map(e => renderServiceButton(e))}
-    </SC.NumericPadList>
-  );
+  return <SC.NumericPadList>{arr.map(e => renderServiceButton(e))}</SC.NumericPadList>;
 };
