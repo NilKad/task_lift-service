@@ -17,6 +17,8 @@ import { floorInfoToArray } from '../helpers/floorInfoToArray';
 const T_MOVEMENT = 2;
 const T_DOOR_OPEN_CLOSE = 2;
 const T_AUTO_DOOR_CLOSE = 5;
+const MIN_FLOOR = 0;
+const MAX_FLOOR = 12;
 
 const PARKING_FLOOR = 0;
 
@@ -63,6 +65,12 @@ export const LiftService = () => {
         if ((direction === 1 && e.continue_up) || (direction === -1 && e.continue_down))
           return true;
       }
+      // проверка max min floor
+      if (isMovement) if (direction === 1 && floor === MAX_FLOOR) return true;
+      if (direction === -1 && floor === MIN_FLOOR) return true;
+      // if (floor === MAX_FLOOR || (floor === MIN_FLOOR && direction !== 0 && isMovement))
+      //   return true;
+
       //если лифт едет вверх и есть вызовы на этажах в низ, то лифт доетет до смого врхнего и остановиться там
       const arr = floorInfoToArray(floorInfo, direction === -1 ? 'continue_up' : 'continue_down');
       // если едем вверх проверяем load, если есть, то дверь не открываем
@@ -203,7 +211,9 @@ export const LiftService = () => {
     }
 
     // лифт едет и должен ехать дальше, перезапуск таймера
+    // console.log('checkNeedOpenDoor: ', checkNeedOpenDoor());
     if (!timeFloortoFloor && direction !== 0 && isMovement && !checkNeedOpenDoor()) {
+      console.log('!!!__!!!');
       const data = await sendCurrentStatus({
         floorNum: currentFloor + direction,
         isMovement,
