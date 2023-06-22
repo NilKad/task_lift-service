@@ -3,18 +3,12 @@ import liftBackground from '../../img/lift.jpg';
 import arrow from '../../img/arrow.png';
 
 export const LiftSimulate = ({ doorOpened, timerDoorClose, doorOpening, enterExitHandler }) => {
-  // console.log(dataFromServer);
-  // const isOpen = doorOpened ? 'open' : '';
   const isOpen = doorOpening ? 'open' : '';
   return (
     <SC.LiftSimulate>
-      {/* <p>{JSON.stringify(dataFromServer)}</p>
-      <p>{dataFromServer.toString()}</p> */}
       <SC.LiftFrame
         style={{
           backgroundImage: `url(${liftBackground})`,
-          // backgroundRepeat: 'no-repeat',
-          // backgroundSize: 'contain',
         }}
       >
         <SC.LiftDoor className={`left ${isOpen} `}>

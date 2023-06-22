@@ -1,7 +1,6 @@
 import * as SC from './DirectionDisplay.styled';
 
 export const DirectionDisplay = ({ direction }) => {
-  const retDirection = str => {};
   return (
     <SC.DirectionDisplay>
       <SC.Direction2 className={`up ${direction === 1 && 'active'}`}>

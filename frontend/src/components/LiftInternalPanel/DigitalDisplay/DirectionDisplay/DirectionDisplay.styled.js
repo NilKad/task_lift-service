@@ -16,7 +16,6 @@ export const Direction2 = styled.div`
   border-left: 16px solid transparent;
   border-right: 16px solid transparent;
   transition: border 100ms linear;
-  /* border-top: 16px solid white; */
   &.up {
     border-bottom: 28px solid #162426;
   }

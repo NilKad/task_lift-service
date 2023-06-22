@@ -20,12 +20,10 @@ export const LiftFrame = styled.div`
 
 export const LiftDoor = styled.div`
   position: relative;
-  /* overflow: hidden; */
   width: 50%;
   transition: transform 2s cubic-bezier(0, 0, 0.6, 1);
   backdrop-filter: blur(5px);
   border: 20px solid #b8bbcc;
-  /* box-shadow: -5px 0px 10px red; */
   &.left .ext,
   &.rigth .ext {
     position: absolute;

@@ -8,8 +8,7 @@ export const FloorDirectionPanel = styled.div`
   background-color: white;
   border: 2px solid #00a2e8;
   color: #00a2e8;
-  box-shadow: 5px 5px 10px rgba(190, 190, 190, 0.9),
-    -7px -7px 20px rgba(255, 255, 255, 0.5);
+  box-shadow: 5px 5px 10px rgba(190, 190, 190, 0.9), -7px -7px 20px rgba(255, 255, 255, 0.5);
 `;
 
 export const FloorInfo = styled.div`
@@ -105,14 +104,5 @@ export const DirectionInt = styled.div`
     bottom: 50%;
     transform: translate(-50%, -4px);
     border-top: 10px solid #00a2e8;
-  }
-  /* &.up.active {
-    border-bottom: 10px solid white;
-  }
-  &.down.active {
-    border-top: 10px solid white;
-  } */
-  &:hover.up {
-    /* border-bottom: 13px solid green; */
   }
 `;
