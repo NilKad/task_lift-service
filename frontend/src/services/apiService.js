@@ -34,12 +34,12 @@ export const sendCallFloorDirection = async ({ floorNum, floorDirection }) => {
 
 export const sendCurrentStatus = async ({ floorNum: num, isMovement, doorOpened: isOpened }) => {
   try {
-    console.log('num: ', num, '\tisMovement: ', isMovement, '\tisOpened: ', isOpened);
+    // console.log('num: ', num, '\tisMovement: ', isMovement, '\tisOpened: ', isOpened);
     const data = await axios.post(`${url}/${num}`, {
       isMovement,
       isOpened,
     });
-    console.log('!API DATA: ', data);
+    // console.log('!API DATA: ', data);
     return data.data;
   } catch (error) {
     console.log(error.message);

@@ -1,8 +1,8 @@
 const { strToBoolean } = require('../helpers');
 
 const checkData = (req, res, next) => {
-  const { MIN_FLOOR } = process.env;
-  const { MAX_FLOOR } = process.env;
+  const { MIN_FLOOR, MAX_FLOOR } = process.env;
+  // const { MAX_FLOOR } = process.env;
   let { floorNum, direction } = req.params;
   let isThrow = false;
   console.log(typeof MIN_FLOOR);

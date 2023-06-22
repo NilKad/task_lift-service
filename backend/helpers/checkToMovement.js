@@ -3,6 +3,7 @@ const { compareFloorNumber } = require('./compareFloorNumber');
 const floorInfoToArray = require('./floorInfoToArray');
 
 const checkToMovement = (data, doorToClose = false) => {
+  const { MAX_FLOOR, MIN_FLOOR } = process.env;
   const { current_floor, direction, load, floor_info, movement, doors_opened } = data;
   //* floor > array.sort()[0] if 'less=true'
   //* floor < arra.sort()[lastindex] if 'less=false'
@@ -11,7 +12,7 @@ const checkToMovement = (data, doorToClose = false) => {
     if (less) return floor > array.sort((a, b) => a - b)[0] ? -1 : 1;
     return floor < array.sort((a, b) => a - b)[array.length - 1] ? 1 : -1;
   };
-  const findFloor = (current_floor, floor_info) => {
+  const currentFloorInFloorInfo = (current_floor, floor_info) => {
     for (const item of floor_info) {
       if (floor_info.floor === current_floor) return item;
     }
@@ -37,10 +38,12 @@ const checkToMovement = (data, doorToClose = false) => {
     return t;
   };
 
-  const curInfoItem = findFloor(current_floor, floor_info);
+  const curInfoItem = currentFloorInFloorInfo(current_floor, floor_info);
+  //* if no Load and FloorInfo then return Direction=0
   if (load.length === 0 && floor_info.length === 0) return 0;
 
   //если был вызов с этажа по текущему направлению движения, вернуть текущее направление
+  //! !!!!
   if (curInfoItem && checkDirFloorInfo(direction, curInfoItem)) {
     return direction;
   }
@@ -61,6 +64,7 @@ const checkToMovement = (data, doorToClose = false) => {
   //* дальше было установел директион direction = 1/-1
   //когда сбрасывается направление
   // 1. если лифт приезжает на этаж по load и больше вызовов нет
+  //! проверить нужно ли
   if ((!movement || doorToClose) && commonArray.length === 0) return 0;
 
   //если есть направление и дверь закрылась, то
@@ -75,9 +79,12 @@ const checkToMovement = (data, doorToClose = false) => {
     load.length === 0 &&
     floor_info.length === 1 &&
     !checkDirFloorInfo(direction, floor_info[0])
-  )
+  ) {
     return direction === 1 ? -1 : 1;
+  }
 
+  if (current_floor == MAX_FLOOR) return -1;
+  if (current_floor == MIN_FLOOR) return 1;
   return direction;
 };
 

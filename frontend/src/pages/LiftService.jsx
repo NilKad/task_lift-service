@@ -62,21 +62,24 @@ export const LiftService = () => {
         if (floor !== e.floor) continue;
         if (direction === 0 && !doorOpened) return true;
 
-        if ((direction === 1 && e.continue_up) || (direction === -1 && e.continue_down))
+        if ((direction === 1 && e.continue_up) || (direction === -1 && e.continue_down)) {
           return true;
+        }
       }
       // проверка max min floor
-      if (isMovement) if (direction === 1 && floor === MAX_FLOOR) return true;
-      if (direction === -1 && floor === MIN_FLOOR) return true;
+      if (isMovement) {
+        if (direction === 1 && floor === MAX_FLOOR) return true;
+        if (direction === -1 && floor === MIN_FLOOR) return true;
+      }
 
       //если лифт едет вверх и есть вызовы на этажах в низ, то лифт доетет до смого врхнего и остановиться там
       const arr = floorInfoToArray(floorInfo, direction === -1 ? 'continue_up' : 'continue_down');
       // если едем вверх проверяем load, если есть, то дверь не открываем
-      if (direction === 1 && currentFloor < load.sort((a, b) => b - a)[0]) return false;
-      if (direction === -1 && currentFloor > load.sort((a, b) => a - b)[0]) return false;
+      if (direction === 1 && floor <= load.sort((a, b) => b - a)[0]) return false;
+      if (direction === -1 && floor >= load.sort((a, b) => a - b)[0]) return false;
 
-      if (direction === 1 && currentFloor === arr.sort((a, b) => b - a)[0]) return true;
-      if (direction === -1 && currentFloor === arr.sort((a, b) => a - b)[0]) return true;
+      if (direction === 1 && floor === arr.sort((a, b) => b - a)[0]) return true;
+      if (direction === -1 && floor === arr.sort((a, b) => a - b)[0]) return true;
       return false;
     };
 
@@ -88,6 +91,13 @@ export const LiftService = () => {
       setTimeFloortoFloor(currentDate.setSeconds(currentDate.getSeconds() + T_MOVEMENT));
     };
 
+    const checkMinMaxFloor = floor => {
+      // console.log('max floor: ', floor === MAX_FLOOR, '\tmin floor: ', floor === MIN_FLOOR);
+      if (direction === 1 && floor === MAX_FLOOR) return true;
+      if (direction === -1 && floor === MIN_FLOOR) return true;
+      return false;
+    };
+
     const startToOpenCloseDoor = () => {
       if (doorOpened) {
         setDoorOpening(false);
@@ -95,13 +105,11 @@ export const LiftService = () => {
         setDoorOpening(true);
       }
       const currentDate = new Date();
-      console.log('!!!!!!!! set OpenDoor');
       setTimerDoorClose(currentDate.setSeconds(currentDate.getSeconds() + T_DOOR_OPEN_CLOSE));
     };
 
     const startAutoDoorClose = () => {
       const currentDate = new Date();
-      console.log('!!!!!!!! set AutoDoorClose');
       setTimerAutoDoorClose(currentDate.setSeconds(currentDate.getSeconds() + T_AUTO_DOOR_CLOSE));
     };
 
@@ -113,13 +121,17 @@ export const LiftService = () => {
       });
       updateStatus(data);
     };
+
     const startMotor = async () => {
+      if (checkMinMaxFloor(currentFloor)) {
+        console.log(`Can't moves to ${direction === 1 ? 'UP' : 'DOWN'}, max/min floor`);
+        return false;
+      }
       const data = await sendCurrentStatus({
         floorNum: currentFloor,
         isMovement: true,
         doorOpened,
       });
-      console.log('!!!!!!!!----- startMotor');
       startToNextFloor();
       updateStatus(data);
     };
@@ -211,7 +223,6 @@ export const LiftService = () => {
     // лифт едет и должен ехать дальше, перезапуск таймера
     // console.log('checkNeedOpenDoor: ', checkNeedOpenDoor());
     if (!timeFloortoFloor && direction !== 0 && isMovement && !checkNeedOpenDoor()) {
-      console.log('!!!__!!!');
       const data = await sendCurrentStatus({
         floorNum: currentFloor + direction,
         isMovement,
@@ -234,6 +245,8 @@ export const LiftService = () => {
       timerDoorClose === null &&
       timeFloortoFloor === null
     ) {
+      //*  shield check direction over min max floor
+
       if (checkNeedOpenDoor()) startToOpenCloseDoor();
       if (!checkNeedOpenDoor() && checkIsNeedToMove()) startMotor();
     }
