@@ -3,7 +3,7 @@ const { setCurrenFloor } = require('../services');
 const liftSetStatus = async (req, res) => {
   const { floorNum } = req.params;
   const { isOpened, isMovement } = req.body;
-  console.log('isOpened: ', isOpened, '\tisMovement: ', isMovement);
+  // console.log('isOpened: ', isOpened, '\tisMovement: ', isMovement);
 
   if (!(floorNum !== undefined && isOpened !== undefined && isMovement !== undefined)) {
     const error = new Error('FlooNum, direction or movement incorrect');

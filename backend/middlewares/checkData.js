@@ -5,9 +5,8 @@ const checkData = (req, res, next) => {
   // const { MAX_FLOOR } = process.env;
   let { floorNum, direction } = req.params;
   let isThrow = false;
-  console.log(typeof MIN_FLOOR);
 
-  console.log('floorNum: ', floorNum);
+  // console.log('floorNum: ', floorNum);
   if (floorNum) {
     floorNum = Number.parseInt(floorNum);
     req.params.floorNum = floorNum;

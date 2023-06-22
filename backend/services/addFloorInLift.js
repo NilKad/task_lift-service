@@ -7,7 +7,7 @@ const addFloorInLift = async floor => {
   if (!load.includes(floor)) {
     data.load.push(floor);
   }
-  console.log('!!!!addFloorInLift data: ', data);
+  // console.log('!!!!addFloorInLift data: ', data);
   if (data.direction === 0 || (data.direction !== 0 && data.load.length === 1)) {
   }
   data.direction = checkToMovement(data); //!!---
