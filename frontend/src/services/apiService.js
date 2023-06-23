@@ -8,7 +8,7 @@ export const getLiftStatus = async () => {
     return data.data;
   } catch (error) {
     console.log(error.message);
-    return;
+    return error;
   }
 };
 
@@ -18,7 +18,7 @@ export const addCallFloor = async ({ num: floorNum }) => {
     return data.data;
   } catch (error) {
     console.log(error.message);
-    return;
+    return error;
   }
 };
 
@@ -28,7 +28,7 @@ export const sendCallFloorDirection = async ({ floorNum, floorDirection }) => {
     return data.data;
   } catch (error) {
     console.log(error.message);
-    return;
+    return error;
   }
 };
 
@@ -43,5 +43,6 @@ export const sendCurrentStatus = async ({ floorNum: num, isMovement, doorOpened:
     return data.data;
   } catch (error) {
     console.log(error.message);
+    return error;
   }
 };

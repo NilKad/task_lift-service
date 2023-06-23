@@ -13,6 +13,7 @@ import {
 import { LIftStatus } from '../components/LIftStatus/LIftStatus';
 import { difDate } from '../utils/difDate';
 import { floorInfoToArray } from '../helpers/floorInfoToArray';
+import { useAPI } from '../hooks/useAPI';
 
 const T_MOVEMENT = 2;
 const T_DOOR_OPEN_CLOSE = 2;
@@ -74,12 +75,23 @@ export const LiftService = () => {
 
       //если лифт едет вверх и есть вызовы на этажах в низ, то лифт доетет до смого врхнего и остановиться там
       const arr = floorInfoToArray(floorInfo, direction === -1 ? 'continue_up' : 'continue_down');
+      const arrAll = floorInfoToArray(floorInfo);
       // если едем вверх проверяем load, если есть, то дверь не открываем
       if (direction === 1 && floor <= load.sort((a, b) => b - a)[0]) return false;
       if (direction === -1 && floor >= load.sort((a, b) => a - b)[0]) return false;
 
-      if (direction === 1 && floor === arr.sort((a, b) => b - a)[0]) return true;
-      if (direction === -1 && floor === arr.sort((a, b) => a - b)[0]) return true;
+      if (
+        direction === 1 &&
+        floor === arr.sort((a, b) => b - a)[0] &&
+        floor === arrAll.sort((a, b) => b - a)[0]
+      )
+        return true;
+      if (
+        direction === -1 &&
+        floor === arr.sort((a, b) => a - b)[0] &&
+        floor === arrAll.sort((a, b) => a - b)[0]
+      )
+        return true;
       return false;
     };
 
@@ -114,12 +126,13 @@ export const LiftService = () => {
     };
 
     const stopMotor = async (floor = currentFloor) => {
-      const data = await sendCurrentStatus({
-        floorNum: floor,
-        isMovement: false,
-        doorOpened,
-      });
-      updateStatus(data);
+      sendApiCurrentStatus({ floorNum: floor, isMovement: false, doorOpened });
+      // const data = await sendCurrentStatus({
+      //   floorNum: floor,
+      //   isMovement: false,
+      //   doorOpened,
+      // });
+      // updateStatus(data);
     };
 
     const startMotor = async () => {
@@ -127,22 +140,26 @@ export const LiftService = () => {
         console.log(`Can't moves to ${direction === 1 ? 'UP' : 'DOWN'}, max/min floor`);
         return false;
       }
-      const data = await sendCurrentStatus({
-        floorNum: currentFloor,
-        isMovement: true,
-        doorOpened,
-      });
+      sendApiCurrentStatus({ floorNum: currentFloor, isMovement: true, doorOpened });
       startToNextFloor();
-      updateStatus(data);
+
+      // const data = await sendCurrentStatus({
+      //   floorNum: currentFloor,
+      //   isMovement: true,
+      //   doorOpened,
+      // });
+      // startToNextFloor();
+      // updateStatus(data);
     };
 
     const sendStatusToServer = async ({ floor = currentFloor, doorOpened }) => {
-      const data = await sendCurrentStatus({
-        floorNum: floor,
-        isMovement,
-        doorOpened,
-      });
-      updateStatus(data);
+      sendApiCurrentStatus({ floorNum: floor, isMovement, doorOpened });
+      // const data = await sendCurrentStatus({
+      //   floorNum: floor,
+      //   isMovement,
+      //   doorOpened,
+      // });
+      // updateStatus(data);
     };
 
     //* check all timers
@@ -271,6 +288,10 @@ export const LiftService = () => {
     setLoad([...dataLoad]);
     setFloorInfo(floor_info);
   };
+
+  const { getApiStatus, addApiCallFloor, sendApiCallFloorDirection, sendApiCurrentStatus } =
+    useAPI(updateStatus);
+
   //* ------- end Upadte current status from server
 
   const liftHandlerButton = async e => {
@@ -282,8 +303,7 @@ export const LiftService = () => {
       liftCore({ isNeedOpenDoor, isNeedCloseDoor });
       return;
     }
-    const data = await addCallFloor({ num });
-    updateStatus(data);
+    addApiCallFloor(num);
   };
 
   const enterExitHandler = () => {
@@ -291,14 +311,11 @@ export const LiftService = () => {
   };
 
   const floorDirectionHandler = async ({ floorNum, floorDirection }) => {
-    const data = await sendCallFloorDirection({ floorNum, floorDirection });
-    updateStatus(data);
+    sendApiCallFloorDirection(floorNum, floorDirection);
   };
 
   const loadData = async () => {
-    const data = await getLiftStatus();
-    // setDataFromServer(data);
-    updateStatus(data);
+    getApiStatus();
   };
 
   useEffect(() => {
