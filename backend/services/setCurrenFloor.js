@@ -1,4 +1,4 @@
-const { checkToMovement } = require('../helpers');
+const { checkToMovement, floorInfoToArray } = require('../helpers');
 const { writeStatus, getStatus } = require('../models');
 
 const setCurrenFloor = async (floor, isOpened, isMovement) => {
@@ -20,12 +20,16 @@ const setCurrenFloor = async (floor, isOpened, isMovement) => {
     const array = data.floor_info;
     data.floor_info = floor_info
       .map(item => {
+        const arr = floorInfoToArray(data.floor_info);
+        const lastCallDirection =
+          data.direction === 1 ? arr.sort((a, b) => b - a)[0] : arr.sort((a, b) => a - b)[0];
         if (floor !== item.floor) return item;
         if (floor == MIN_FLOOR || floor == MAX_FLOOR) return null;
         const direction = data.direction === -1 ? 'continue_down' : 'continue_up';
         if (data.load.length === 0) return null;
         if (direction in item) delete item[direction];
         if (!('continue_up' in item) && !('continue_down' in item)) return null;
+        if (lastCallDirection === item.floor) return null;
         return item;
       })
       .filter(e => e !== null);

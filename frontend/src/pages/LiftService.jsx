@@ -142,24 +142,10 @@ export const LiftService = () => {
       }
       sendApiCurrentStatus({ floorNum: currentFloor, isMovement: true, doorOpened });
       startToNextFloor();
-
-      // const data = await sendCurrentStatus({
-      //   floorNum: currentFloor,
-      //   isMovement: true,
-      //   doorOpened,
-      // });
-      // startToNextFloor();
-      // updateStatus(data);
     };
 
     const sendStatusToServer = async ({ floor = currentFloor, doorOpened }) => {
       sendApiCurrentStatus({ floorNum: floor, isMovement, doorOpened });
-      // const data = await sendCurrentStatus({
-      //   floorNum: floor,
-      //   isMovement,
-      //   doorOpened,
-      // });
-      // updateStatus(data);
     };
 
     //* check all timers
