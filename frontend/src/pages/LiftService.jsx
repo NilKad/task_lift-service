@@ -305,7 +305,7 @@ export const LiftService = () => {
     loadData();
     const t = setInterval(() => loadData(), 1000);
     setIntervalId(t);
-  }, [direction, doorOpened, floorInfo.length, intervalId, isMovement]);
+  }, [direction, doorOpened, floorInfo.length, getApiStatus, intervalId, isMovement]);
 
   useMemo(() => {
     liftCore({});
