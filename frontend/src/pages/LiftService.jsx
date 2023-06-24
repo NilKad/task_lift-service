@@ -295,17 +295,17 @@ export const LiftService = () => {
     sendApiCallFloorDirection(floorNum, floorDirection);
   };
 
-  const loadData = async () => {
-    getApiStatus();
-  };
-
   useEffect(() => {
+    const loadData = async () => {
+      getApiStatus();
+    };
+
     if (intervalId) return;
     setIsFirstLoading(true);
     loadData();
     const t = setInterval(() => loadData(), 1000);
     setIntervalId(t);
-  }, [direction, doorOpened, floorInfo.length, intervalId, isMovement, loadData]);
+  }, [direction, doorOpened, floorInfo.length, intervalId, isMovement]);
 
   useMemo(() => {
     liftCore({});
