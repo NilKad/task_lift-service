@@ -4,12 +4,7 @@ import { FloorCallPanels } from '../components/FloorCallPanels/FloorCallPanels';
 import { LiftInternalPanel } from '../components/LiftInternalPanel/LiftInternalPanel';
 import { Section } from '../components/Section/Section';
 import * as SC from './LiftService.styled';
-import {
-  addCallFloor,
-  getLiftStatus,
-  sendCallFloorDirection,
-  sendCurrentStatus,
-} from '../services/apiService';
+import { sendCurrentStatus } from '../services/apiService';
 import { LIftStatus } from '../components/LIftStatus/LIftStatus';
 import { difDate } from '../utils/difDate';
 import { floorInfoToArray } from '../helpers/floorInfoToArray';

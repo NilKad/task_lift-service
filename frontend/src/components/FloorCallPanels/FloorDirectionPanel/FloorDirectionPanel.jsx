@@ -11,7 +11,6 @@ export const FloorDirectionPanel = ({
   const { up, down } = activeDirections;
   const isFloorActive = currentFloor === floorNum ? 'active' : '';
 
-  const isShowLifgtButton = () => {};
   const onClickHandler = e => {
     //* check isue this floor and direction
     const classList = e.target.classList;

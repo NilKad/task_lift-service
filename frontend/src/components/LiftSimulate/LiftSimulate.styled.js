@@ -1,4 +1,4 @@
-import lift from '../../img/lift.jpg';
+// import lift from '../../img/lift.jpg';
 import styled from 'styled-components';
 
 export const LiftSimulate = styled.div`
