@@ -10,7 +10,8 @@ import { GlobalStyle } from './components/BasesStyles/GlobalStyle';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-  <BrowserRouter basename="/task_lift-service">
+  // <BrowserRouter basename="/task_lift-service">
+  <BrowserRouter>
     <GlobalStyle />
     <App />
   </BrowserRouter>
