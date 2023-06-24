@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container } from '../components/Container/Container';
 import { FloorCallPanels } from '../components/FloorCallPanels/FloorCallPanels';
 import { LiftInternalPanel } from '../components/LiftInternalPanel/LiftInternalPanel';
