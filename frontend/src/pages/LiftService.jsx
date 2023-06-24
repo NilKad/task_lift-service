@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Container } from '../components/Container/Container';
 import { FloorCallPanels } from '../components/FloorCallPanels/FloorCallPanels';
 import { LiftInternalPanel } from '../components/LiftInternalPanel/LiftInternalPanel';
@@ -298,7 +298,7 @@ export const LiftService = () => {
   useEffect(() => {
     const loadData = async () => {
       getApiStatus();
-      // liftCore({})
+      // liftCore({});
     };
 
     if (intervalId) return;
@@ -318,9 +318,12 @@ export const LiftService = () => {
     floorInfo,
   ]);
 
-  // useMemo(() => {
-  //   liftCore({});
-  // }, [isMovement, direction, load, doorOpened, currentFloor, floorInfo]);
+  useMemo(() => {
+    // const test = { isMovement, direction, load, doorOpened, currentFloor, floorInfo };
+    // if (test) {
+    // }
+    liftCore({});
+  }, [isMovement, direction, load, doorOpened, currentFloor, floorInfo, liftCore]); // eslint-disable-line
 
   return (
     <Section>
