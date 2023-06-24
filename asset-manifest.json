@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.c8354e29.css",
-    "main.js": "/static/js/main.477f45f8.js",
-    "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
-    "static/media/lift.jpg": "/static/media/lift.30f6c8b692cedd97f0c1.jpg",
-    "static/media/arrow.png": "/static/media/arrow.0cef5348af1aa2fcfe6d.png",
-    "static/media/7LED.ttf": "/static/media/7LED.4ee37691b06453ef8265.ttf",
-    "static/media/Technology-Bold.woff": "/static/media/Technology-Bold.8e25206e20c0377aea2c.woff",
-    "static/media/Technology.woff": "/static/media/Technology.c7042104a9960caf03d8.woff",
-    "index.html": "/index.html",
-    "main.c8354e29.css.map": "/static/css/main.c8354e29.css.map",
-    "main.477f45f8.js.map": "/static/js/main.477f45f8.js.map",
-    "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
+    "main.css": "/task_lift-service/static/css/main.04ce9405.css",
+    "main.js": "/task_lift-service/static/js/main.a0be5ce8.js",
+    "static/js/787.cda612ba.chunk.js": "/task_lift-service/static/js/787.cda612ba.chunk.js",
+    "static/media/lift.jpg": "/task_lift-service/static/media/lift.30f6c8b692cedd97f0c1.jpg",
+    "static/media/arrow.png": "/task_lift-service/static/media/arrow.0cef5348af1aa2fcfe6d.png",
+    "static/media/7LED.ttf": "/task_lift-service/static/media/7LED.4ee37691b06453ef8265.ttf",
+    "static/media/Technology-Bold.woff": "/task_lift-service/static/media/Technology-Bold.8e25206e20c0377aea2c.woff",
+    "static/media/Technology.woff": "/task_lift-service/static/media/Technology.c7042104a9960caf03d8.woff",
+    "index.html": "/task_lift-service/index.html",
+    "main.04ce9405.css.map": "/task_lift-service/static/css/main.04ce9405.css.map",
+    "main.a0be5ce8.js.map": "/task_lift-service/static/js/main.a0be5ce8.js.map",
+    "787.cda612ba.chunk.js.map": "/task_lift-service/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c8354e29.css",
-    "static/js/main.477f45f8.js"
+    "static/css/main.04ce9405.css",
+    "static/js/main.a0be5ce8.js"
   ]
 }
