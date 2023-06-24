@@ -306,24 +306,14 @@ export const LiftService = () => {
     loadData();
     const t = setInterval(() => loadData(), 1000);
     setIntervalId(t);
-  }, [
-    direction,
-    doorOpened,
-    floorInfo.length,
-    getApiStatus,
-    intervalId,
-    isMovement,
-    load,
-    currentFloor,
-    floorInfo,
-  ]);
+  }, [direction, doorOpened, floorInfo.length, getApiStatus, intervalId, isMovement]);
 
   useMemo(() => {
     // const test = { isMovement, direction, load, doorOpened, currentFloor, floorInfo };
     // if (test) {
     // }
     liftCore({});
-  }, [isMovement, direction, load, doorOpened, currentFloor, floorInfo, liftCore]); // eslint-disable-line
+  }, [isMovement, direction, load, doorOpened, currentFloor, floorInfo]); // eslint-disable-line
 
   return (
     <Section>
