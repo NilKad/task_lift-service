@@ -10,7 +10,7 @@ const getStatus = async () => {
 };
 
 const writeStatus = async data => {
-  await fs.writeFile(liftStatus, JSON.stringify(data, null, 2));
+  await fs.writeFile(liftStatus, JSON.stringify(data, null, 2));``
   return data;
 };
 
